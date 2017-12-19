@@ -1,3 +1,16 @@
 /* DnD Cipher CSS */
 
+#container {
+    width: 100%;
+}
+
+#main {
+    margin: 0 auto;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
 /* end */

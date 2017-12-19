@@ -1,12 +1,33 @@
 <!doctype html>
-
 <html>
   <head>
+    <meta charset="utf-8" />
     <title>DnD Cipher</title>
+    <link rel="stylesheet" href="static/style.css" />
   </head>
 
   <body>
-    <p>Coming soon</p>
-  </body>
+    <div id="container">
+      <h1>DnD Cipher</h1>
+      <div id="main">
 
+        <div>
+          <textarea rows="5" cols="32" id='encode_this'>Put your message to encode here</textarea>
+        </div>
+
+        <div>
+          <p>
+            <input type="button" value="Encode" id="encode_butt" />
+            <input type="button" value="Decode" id="decode_butt" />
+            <input type="button" value="Clear"  id="clear_butt"  />
+          </p>
+        </div>
+
+        <div>
+          <textarea id="result" cols="32" rows="5">Result goes here</textarea>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="static/app.js"></script>
 </html>
