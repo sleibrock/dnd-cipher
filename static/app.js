@@ -79,13 +79,26 @@ var rotateChar = function(chr, x)
 var cipher = function(target)
 {
     var ret = target.split("");
-    var shifts = ret.map(getCipherValue); // generate all the character shifts here
-    //console.log("Shifts: " + shifts);
-
+    var cipherV = 0;
+    var lastV = 0;
+    var difference = 0;
     for(var i=0; i < ret.length; i++)
-        if (i != 0)
-            ret[i] = rotateChar(ret[i], shifts[i-1]);
-
+    {
+        cipherV = getCipherValue(ret[i]);
+        if(cipherV != 0)
+        {
+            if(lastV == 0)
+            {
+                lastV = cipherV;
+            }
+            else
+            {
+                difference = Math.abs(lastV);
+                lastV = getCipherValue(ret[i]);
+                ret[i] = rotateChar(ret[i], difference);
+            }
+        }
+    }
     return ret.join("");
 };
 
@@ -103,14 +116,9 @@ var decipher = function(target)
     for(var i=0; i < ret.length; i++)
     {
         cipherV = getCipherValue(ret[i]);
-        if (cipherV == 0)
+        if(cipherV != 0)
         {
-            // current character isn't a cipher value (like a space, %, &, etc)
-            // reset the current values and proceed
-            lastV = 0;
-        }
-        else
-        {
+            // we only operate on characters that have non-zero cipher values
             if(lastV == 0)
             {
                 // we're still on the first character, so store and then continue
@@ -120,7 +128,7 @@ var decipher = function(target)
             else
             {
                 // now we can shift the current character with the lastV value
-                difference = 26 - lastV;
+                difference = Math.abs(26 - lastV);
                 //console.log("Shifting " + ret[i] + " " + difference + " places");
                 ret[i] = rotateChar(ret[i], difference);
                 lastV = getCipherValue(ret[i]);
